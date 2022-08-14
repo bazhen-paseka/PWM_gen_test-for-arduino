@@ -105,6 +105,8 @@ int main(void)
 
 	sprintf(DataChar,"\r\n\tfor debug: UART1 115200/8-N-1\r\n" ) ;
 	HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
+	HAL_TIM_Base_Start(&htim2);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
 
   /* USER CODE END 2 */
 
