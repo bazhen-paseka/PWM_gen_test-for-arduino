@@ -105,7 +105,6 @@ int main(void)
 
 	sprintf(DataChar,"\r\n\tfor debug: UART1 115200/8-N-1\r\n" ) ;
 	HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
-	HAL_TIM_Base_Start(&htim2);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
 
   /* USER CODE END 2 */
@@ -114,6 +113,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	for ( uint32_t pulse_u32 = 0; pulse_u32 < 3001 ; pulse_u32 += 50 ) {
+		TIM2->CCR3 = pulse_u32;
+		sprintf(DataChar, "PWM= %04lu\r\n", pulse_u32) ;
+		HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
+		HAL_Delay(1000);
+	}
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
